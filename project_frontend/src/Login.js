@@ -21,8 +21,6 @@ const Login = () => {
 
       if (res.status === 201) {
         console.log("Login Successful");
-        // const token = res.data.token;
-        // console.log(res.data.token);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         navigate(`/profile/${res.data.username}`);
         } 

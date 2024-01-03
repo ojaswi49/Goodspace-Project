@@ -82,7 +82,6 @@ app.post("/login", async (req, res) => {
     if (isPasswordValid) {
       const secretkey = process.env.SECRET_KEY;
       console.log(existingUser.username, existingUser.name);
-      // const token = jwt.sign({username: existingUser.username,name: existingUser.name},secretkey);
       const token = {
         username: existingUser.username,
         name: existingUser.name,
@@ -125,7 +124,6 @@ io.on("connection", (socket) => {
       reply_text: reply.data.data.conversation.output,
     });
   });
-  //   socket.on("sendMessage", (message) => {});
 });
 
 const store = async (content, isUser, username) => {

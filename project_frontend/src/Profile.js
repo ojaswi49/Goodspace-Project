@@ -12,7 +12,6 @@ const Profile = () => {
   useEffect(() => {
     const ocket = io("localhost:3001");
     setSocket(ocket);
-    // socket.emit("sendMessage", "What is life?");
     ocket.on("welcome", (data) => {
       console.log(data);
       setSocketId(data);

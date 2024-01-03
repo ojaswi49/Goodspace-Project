@@ -21,14 +21,11 @@ const Chatbox = ({ socket, socketId }) => {
   const [username, setusername] = useState("");
   const [text, setText] = useState("");
   const { speak, cancel } = useSpeechSynthesis();
-  // const [transcript, setTranscript] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [textspeech, setTextSpeech] = useState("");
   const videoRef = useRef(null);
   const [isCameraOn, setIsCameraOn] = useState(false);
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
-      // Handle the recognized speech result
       setMessage(result);
     },
   });
@@ -36,7 +33,6 @@ const Chatbox = ({ socket, socketId }) => {
   const chatContainerRef = useRef();
 
   useEffect(() => {
-    // Scroll to the bottom when new content is added
     scrollToBottom();
   }, [messages]);
 
@@ -69,7 +65,6 @@ const Chatbox = ({ socket, socketId }) => {
         const token = localStorage.getItem("token");
         const tokenObj = JSON.parse(token);
         console.log(tokenObj.username);
-        // console.log(token.username);
         const response = await axios.get(
           "http://localhost:3001/get-conversation",
           {
@@ -90,7 +85,7 @@ const Chatbox = ({ socket, socketId }) => {
       }
     };
 
-    fetchData(); // Call the function to fetch data
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -119,7 +114,6 @@ const Chatbox = ({ socket, socketId }) => {
 
   const handleAudioClick = (e) => {
     e.preventDefault();
-    // Ensure that `speech` is a function before calling it
     if (typeof speak === "function") {
       if (!isPlaying) {
         setIsPlaying(true);
@@ -139,22 +133,6 @@ const Chatbox = ({ socket, socketId }) => {
     }
   };
 
-  // const handleSpeechtoText = (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     socket.emit("u"ser_message", {
-  //       from: socketId,
-  //       content: transcript,
-  //       username: username,
-  //     });
-  //     const msg = [...messages, { isUser: true, content: transcript }];
-  //     setMessages(msg);
-  //     setTranscript("");
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   useEffect(() => {
     let stream;
 
@@ -167,7 +145,6 @@ const Chatbox = ({ socket, socketId }) => {
             videoRef.current.srcObject = stream;
           }
         } else {
-          // If turning off camera, stop the stream and tracks
           if (stream) {
             const tracks = stream.getTracks();
             tracks.forEach((track) => track.stop());
@@ -183,7 +160,6 @@ const Chatbox = ({ socket, socketId }) => {
 
     setupCamera();
 
-    // Cleanup function to stop the stream when the component unmounts
     return () => {
       if (stream) {
         const tracks = stream.getTracks();
@@ -197,18 +173,17 @@ const Chatbox = ({ socket, socketId }) => {
   };
 
   const deleteChat = () => {
-    try
-    {
+    try {
       const res = axios.delete("http://localhost:3001/delete-chat", {
-      username: username
-    });
-    if(res.status === 201){
-      setMessage([]);
-    }}
-    catch(e){
+        username: username,
+      });
+      if (res.status === 201) {
+        setMessage([]);
+      }
+    } catch (e) {
       console.log("Error");
     }
-  }
+  };
 
   return (
     <div className="completepage">
@@ -276,11 +251,6 @@ const Chatbox = ({ socket, socketId }) => {
                 }}
               />
             </div>
-            {/* <div className="prompt-btn">
-              <DeleteIcon
-              className="icon"
-              onClick={deleteChat} />
-            </div> */}
           </form>
         </div>
 
@@ -325,43 +295,6 @@ const Chatbox = ({ socket, socketId }) => {
             </div>
           </div>
         </div>
-
-        {/* <p>Microphone : {listening ? "on" : "off"} </p> */}
-        {/* {!listening ? (
-        <button
-          onClick={() => {
-            listen();
-          }}
-        >
-          {" "}
-          Record
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            stop();
-          }}
-        >
-          Stop
-        </button>
-      )} */}
-        {/* <button
-        onClick={() => {
-          setTranscript("");
-        }}
-      >
-        {" "}
-        Delete{" "}
-      </button>
-      <button onClick={handleSpeechtoText}> Search </button> */}
-        {/* <button onClick={}>Reset</button> */}
-        {/* <input
-        value={transcript}
-        type="text"
-        onChange={(e) => {
-          setTranscript(e.target.value);
-        }}
-      /> */}
       </div>
     </div>
   );
