@@ -1,0 +1,97 @@
+.SignUpPage {
+  background-image: url('../assets/bg_2.jpg');
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.content-space {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rem;
+}
+
+.short-logo {
+  width: 7rem;
+}
+
+.head {
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.form_signup {
+  --tw-backdrop-blur: blur(90px);
+  backdrop-filter: var(--tw-backdrop-blur);
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 80%;
+  color: white;
+  padding: 4rem;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.form-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-login {
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+  border-radius: 5px;
+  border: transparent;
+}
+
+
+.username {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.password {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 0;
+  border-radius: 5px;
+  border: transparent;
+  background-color: #297bca;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #4491d9;
+}
